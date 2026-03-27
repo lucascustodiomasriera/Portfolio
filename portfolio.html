@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucas Custodio — Creative Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0d0d0d; --surface: #161616; --border: #2a2a2a;
+    --text: #e8e4dc; --muted: #7a7570; --accent: #c9a96e;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(13,13,13,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.08em; color: var(--text); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 6rem 2rem 4.5rem; max-width: 900px; margin: 0 auto;
+  }
+  .hero-tag { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.35s forwards; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero p { font-size: 0.95rem; color: var(--muted); max-width: 440px; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.7s 0.5s forwards; }
+  .hero-line { width: 48px; height: 1px; background: var(--accent); opacity: 0; animation: fadeUp 0.6s 0.65s forwards; }
+
+  section { max-width: 900px; margin: 0 auto; padding: 5rem 2rem; border-top: 1px solid var(--border); }
+  .section-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 3rem; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; text-decoration: none; color: inherit; display: block; transition: border-color 0.25s, transform 0.25s; }
+  .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .card-thumb { aspect-ratio: 16/9; background: #1a1a1a; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .card-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: opacity 0.3s; }
+  .card:hover .card-thumb img { opacity: 1; }
+  .play-icon { position: absolute; width: 42px; height: 42px; background: rgba(201,169,110,0.92); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.25s; }
+  .card:hover .play-icon { opacity: 1; }
+  .play-icon svg { margin-left: 3px; }
+  .placeholder { color: #333; font-size: 1.6rem; }
+  .card-body { padding: 1rem 1.2rem 1.25rem; }
+  .card-type { font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
+  .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; font-weight: 400; margin-bottom: 0.3rem; }
+  .card-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+  .about-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.2; }
+  .about-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.85; margin-bottom: 1rem; }
+  .skills-list { list-style: none; }
+  .skills-list li { font-size: 0.8rem; color: var(--muted); padding: 0.65rem 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+  .skills-list li span { color: var(--accent); }
+
+  .contact-block h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 0.5rem; }
+  .contact-block p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.8rem; }
+  .contact-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .contact-link { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+  .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  footer { border-top: 1px solid var(--border); padding: 1.8rem 2rem; text-align: center; font-size: 0.72rem; color: var(--muted); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.2rem; }
+    .nav-links { gap: 1.2rem; }
+    .hero { padding: 5rem 1.2rem 3rem; }
+    section { padding: 3.5rem 1.2rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-name">Lucas Custodio</a>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <p class="hero-tag">Video Editing · Motion Design · 3D</p>
+  <h1>Creative work<br>done <em>right.</em></h1>
+  <p>A selection of video and design projects — built independently from age 14.</p>
+  <div class="hero-line"></div>
+</div>
+
+<section id="work">
+  <p class="section-label">Selected Work</p>
+  <div class="grid">
+
+    <!-- Duplicate and edit these cards. For videos: set href to YouTube/Vimeo link. For images: set href to the image file. Replace placeholder with <img src="your-thumb.jpg" alt="..."> -->
+
+    <a class="card" href="YOUR_LINK_1" target="_blank" rel="noopener">
+      <div class="card-thumb">
+        <span class="placeholder">▶</span>
+        <div class="play-icon"><svg width="13" height="15" viewBox="0 0 13 15" fill="#0d0d0d"><polygon points="0,0 13,7.5 0,15"/></svg></div>
+      </div>
+      <div class="card-body">
+        <p class="card-type">Video Editing</p>
+        <p class="card-title">Project Title 1</p>
+        <p class="card-desc">Short description — client, style, or context.</p>
+      </div>
+    </a>
+
+    <a class="card" href="YOUR_LINK_2" target="_blank" rel="noopener">
+      <div class="card-thumb">
+        <span class="placeholder">▶</span>
+        <div class="play-icon"><svg width="13" height="15" viewBox="0 0 13 15" fill="#0d0d0d"><polygon points="0,0 13,7.5 0,15"/></svg></div>
+      </div>
+      <div class="card-body">
+        <p class="card-type">Video Editing</p>
+        <p class="card-title">Project Title 2</p>
+        <p class="card-desc">Short description — client, style, or context.</p>
+      </div>
+    </a>
+
+    <a class="card" href="YOUR_LINK_3" target="_blank" rel="noopener">
+      <div class="card-thumb">
+        <span class="placeholder">▶</span>
+        <div class="play-icon"><svg width="13" height="15" viewBox="0 0 13 15" fill="#0d0d0d"><polygon points="0,0 13,7.5 0,15"/></svg></div>
+      </div>
+      <div class="card-body">
+        <p class="card-type">Motion Design</p>
+        <p class="card-title">Project Title 3</p>
+        <p class="card-desc">Short description — client, style, or context.</p>
+      </div>
+    </a>
+
+    <a class="card" href="YOUR_LINK_4" target="_blank" rel="noopener">
+      <div class="card-thumb">
+        <span class="placeholder">▶</span>
+        <div class="play-icon"><svg width="13" height="15" viewBox="0 0 13 15" fill="#0d0d0d"><polygon points="0,0 13,7.5 0,15"/></svg></div>
+      </div>
+      <div class="card-body">
+        <p class="card-type">Video Editing</p>
+        <p class="card-title">Project Title 4</p>
+        <p class="card-desc">Short description — client, style, or context.</p>
+      </div>
+    </a>
+
+    <a class="card" href="YOUR_LINK_5" target="_blank" rel="noopener">
+      <div class="card-thumb">
+        <span class="placeholder">◻</span>
+      </div>
+      <div class="card-body">
+        <p class="card-type">Graphic Design</p>
+        <p class="card-title">Project Title 5</p>
+        <p class="card-desc">Short description — client, style, or context.</p>
+      </div>
+    </a>
+
+    <a class="card" href="YOUR_LINK_6" target="_blank" rel="noopener">
+      <div class="card-thumb">
+        <span class="placeholder">◻</span>
+      </div>
+      <div class="card-body">
+        <p class="card-type">3D / Blender</p>
+        <p class="card-title">Project Title 6</p>
+        <p class="card-desc">Short description — client, style, or context.</p>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<section id="about">
+  <p class="section-label">About</p>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>Self-taught.<br>Commercially driven.</h2>
+      <p>I started editing video at 14 — not as a hobby, but as a business. I sourced my own clients through Fiverr and social media, set my own rates, and delivered projects end-to-end.</p>
+      <p>Every project here was built independently. No agency, no team — just the work.</p>
+    </div>
+    <ul class="skills-list">
+      <li>Video Editing <span>Premiere Pro</span></li>
+      <li>Motion & VFX <span>After Effects</span></li>
+      <li>Photo & Compositing <span>Photoshop</span></li>
+      <li>3D <span>Blender</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="section-label">Contact</p>
+  <div class="contact-block">
+    <h2>Let's talk.</h2>
+    <p>Open to freelance projects and collaborations.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:Lcustodiomasriera@gmail.com">Email</a>
+      <a class="contact-link" href="https://linkedin.com/in/lucascustodio" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Lucas Custodio Masriera</footer>
+
+</body>
+</html>
