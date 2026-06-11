@@ -6,183 +6,244 @@
 <title>Lucas Custodio — Creative Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #0d0d0d; --surface: #161616; --border: #2a2a2a;
-    --text: #e8e4dc; --muted: #7a7570; --accent: #c9a96e;
-  }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0d0d0d; --surface: #161616; --border: #2a2a2a;
+  --text: #e8e4dc; --muted: #7a7570; --accent: #c9a96e;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; }
 
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center;
-    background: rgba(13,13,13,0.88); backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.08em; color: var(--text); text-decoration: none; }
-  .nav-links { display: flex; gap: 2rem; }
-  .nav-links a { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent); }
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center;
+  background: rgba(13,13,13,0.88); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; letter-spacing: 0.08em; color: var(--text); text-decoration: none; }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--accent); }
 
-  .hero {
-    min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 6rem 2rem 4.5rem; max-width: 900px; margin: 0 auto;
-  }
-  .hero-tag { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
-  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.35s forwards; }
-  .hero h1 em { font-style: italic; color: var(--accent); }
-  .hero p { font-size: 0.95rem; color: var(--muted); max-width: 440px; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.7s 0.5s forwards; }
-  .hero-line { width: 48px; height: 1px; background: var(--accent); opacity: 0; animation: fadeUp 0.6s 0.65s forwards; }
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 6rem 2rem 4.5rem; max-width: 900px; margin: 0 auto;
+}
+.hero-tag { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.6s 0.2s forwards; }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 300; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.7s 0.35s forwards; }
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero p { font-size: 0.95rem; color: var(--muted); max-width: 440px; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.7s 0.5s forwards; }
+.hero-line { width: 48px; height: 1px; background: var(--accent); opacity: 0; animation: fadeUp 0.6s 0.65s forwards; }
 
-  section { max-width: 900px; margin: 0 auto; padding: 5rem 2rem; border-top: 1px solid var(--border); }
-  .section-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 3rem; }
+section { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; border-top: 1px solid var(--border); }
+.section-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 3rem; }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+/* VIDEO GRID — 16/9 horizontal, 3 columns */
+.video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; text-decoration: none; color: inherit; display: block; transition: border-color 0.25s, transform 0.25s; }
+.card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.card-thumb-video { aspect-ratio: 16/9; background: #1a1a1a; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.card-thumb-video img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: opacity 0.3s; }
+.card:hover .card-thumb-video img { opacity: 1; }
+.play-icon { position: absolute; width: 42px; height: 42px; background: rgba(201,169,110,0.92); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: opacity 0.25s; }
+.card-thumb-video .play-icon { opacity: 0; }
+.card:hover .play-icon { opacity: 1; }
+.play-icon svg { margin-left: 3px; }
+.placeholder { color: #333; font-size: 1.6rem; }
+.card-body { padding: 1rem 1.2rem 1.25rem; }
+.card-type { font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
+.card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; font-weight: 400; margin-bottom: 0.3rem; }
+.card-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
 
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; text-decoration: none; color: inherit; display: block; transition: border-color 0.25s, transform 0.25s; }
-  .card:hover { border-color: var(--accent); transform: translateY(-3px); }
-  .card-thumb { aspect-ratio: 4/5; background: #1a1a1a; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-  .card-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: opacity 0.3s; }
-  .card:hover .card-thumb img { opacity: 1; }
-  .play-icon { position: absolute; width: 42px; height: 42px; background: rgba(201,169,110,0.92); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.25s; }
-  .card:hover .play-icon { opacity: 1; }
-  .play-icon svg { margin-left: 3px; }
-  .placeholder { color: #333; font-size: 1.6rem; }
-  .card-body { padding: 1rem 1.2rem 1.25rem; }
-  .card-type { font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
-  .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; font-weight: 400; margin-bottom: 0.3rem; }
-  .card-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+/* DESIGN GRID — 4/5 vertical, 4 columns */
+.design-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.design-card { position: relative; cursor: pointer; overflow: hidden; border-radius: 4px; border: 1px solid var(--border); transition: border-color 0.25s, transform 0.25s; background: var(--surface); }
+.design-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.design-card-thumb { aspect-ratio: 4/5; overflow: hidden; }
+.design-card-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; transition: opacity 0.3s, transform 0.4s; }
+.design-card:hover .design-card-thumb img { opacity: 1; transform: scale(1.03); }
+.design-card-label { padding: 0.7rem 0.9rem 0.85rem; }
+.design-card-label .card-type { margin-bottom: 0.2rem; }
+.design-card-label .card-title { font-size: 0.95rem; }
+.zoom-hint { position: absolute; top: 0.6rem; right: 0.6rem; background: rgba(13,13,13,0.75); border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; }
+.design-card:hover .zoom-hint { opacity: 1; }
+.zoom-hint svg { width: 14px; height: 14px; stroke: var(--accent); fill: none; stroke-width: 2; }
 
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-  .about-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.2; }
-  .about-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.85; margin-bottom: 1rem; }
-  .skills-list { list-style: none; }
-  .skills-list li { font-size: 0.8rem; color: var(--muted); padding: 0.65rem 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
-  .skills-list li span { color: var(--accent); }
+/* LIGHTBOX */
+.lightbox { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; }
+.lightbox.active { display: flex; }
+.lightbox-inner { position: relative; max-width: 90vw; max-height: 90vh; display: flex; align-items: center; justify-content: center; }
+.lightbox-inner img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 2px; }
+.lightbox-close { position: fixed; top: 1.5rem; right: 1.8rem; background: none; border: none; color: var(--muted); font-size: 2rem; cursor: pointer; line-height: 1; transition: color 0.2s; z-index: 1000; }
+.lightbox-close:hover { color: var(--accent); }
+.lightbox-nav { position: fixed; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--muted); font-size: 2.5rem; cursor: pointer; padding: 1rem; transition: color 0.2s; z-index: 1000; line-height: 1; }
+.lightbox-nav:hover { color: var(--accent); }
+.lightbox-prev { left: 1rem; }
+.lightbox-next { right: 1rem; }
+.lightbox-counter { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); font-size: 0.72rem; letter-spacing: 0.14em; color: var(--muted); }
 
-  .contact-block h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 0.5rem; }
-  .contact-block p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.8rem; }
-  .contact-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-  .contact-link { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
-  .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+/* ABOUT */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.about-text h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 1rem; line-height: 1.2; }
+.about-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.85; margin-bottom: 1rem; }
+.skills-list { list-style: none; }
+.skills-list li { font-size: 0.8rem; color: var(--muted); padding: 0.65rem 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+.skills-list li span { color: var(--accent); }
 
-  footer { border-top: 1px solid var(--border); padding: 1.8rem 2rem; text-align: center; font-size: 0.72rem; color: var(--muted); }
+/* CONTACT */
+.contact-block h2 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 0.5rem; }
+.contact-block p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.8rem; }
+.contact-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.contact-link { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+.contact-link:hover { color: var(--accent); border-color: var(--accent); }
 
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+footer { border-top: 1px solid var(--border); padding: 1.8rem 2rem; text-align: center; font-size: 0.72rem; color: var(--muted); }
 
-  @media (max-width: 640px) {
-    nav { padding: 1rem 1.2rem; }
-    .nav-links { gap: 1.2rem; }
-    .hero { padding: 5rem 1.2rem 3rem; }
-    section { padding: 3.5rem 1.2rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-    .grid { grid-template-columns: 1fr; }
-  }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 900px) {
+  .design-grid { grid-template-columns: repeat(3, 1fr); }
+  .video-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  nav { padding: 1rem 1.2rem; }
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: 0.65rem; }
+  .hero { padding: 5rem 1.2rem 3rem; }
+  section { padding: 3.5rem 1.2rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .design-grid { grid-template-columns: repeat(2, 1fr); }
+  .video-grid { grid-template-columns: 1fr; }
+  .lightbox-nav { display: none; }
+}
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="#" class="nav-name">Lucas Custodio Masriera</a>
+  <a href="#" class="nav-name">Lucas Custodio</a>
   <div class="nav-links">
-    <a href="#work">Work</a>
+    <a href="#videos">Vídeos</a>
+    <a href="#designs">Diseños</a>
+    <a href="#personal">Personal</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
 
 <div class="hero">
-  <p class="hero-tag">Video Editing · Motion Design · 3D</p>
+  <p class="hero-tag">Video Editing · Motion Design · Graphic Design</p>
   <h1>Creative work<br>done <em>right.</em></h1>
-  <p>A selection of video and design projects — built independently from age 15.</p>
+  <p>A selection of video and design projects — built independently from age 14.</p>
   <div class="hero-line"></div>
 </div>
 
-<section id="work">
-  <p class="section-label">Selected Work</p>
-  <div class="grid">
+<!-- VÍDEOS -->
+<section id="videos">
+  <p class="section-label">Vídeos</p>
+  <div class="video-grid">
 
-    <!-- Duplicate and edit these cards. For videos: set href to YouTube/Vimeo link. For images: set href to the image file. Replace placeholder with <img src="your-thumb.jpg" alt="..."> -->
-
-    <a class="card" href="YOUR_LINK_1" target="_blank" rel="noopener">
-      <div class="card-thumb">
+    <a class="card" href="https://www.youtube.com/watch?v=YOUR_LINK_1" target="_blank" rel="noopener">
+      <div class="card-thumb-video">
+        <!-- Sustituye por: <img src="thumb1.jpg" alt="..."> -->
         <span class="placeholder">▶</span>
         <div class="play-icon"><svg width="13" height="15" viewBox="0 0 13 15" fill="#0d0d0d"><polygon points="0,0 13,7.5 0,15"/></svg></div>
       </div>
       <div class="card-body">
         <p class="card-type">Video Editing</p>
-        <p class="card-title">Youtube Type Content </p>
-        <p class="card-desc">Youtube content edited for Miguel Ortiz, Symmetry founder & famous personal developement content creator.</p>
+        <p class="card-title">Youtube Type Content</p>
+        <p class="card-desc">Youtube content edited for Miguel Ortiz, Symmetry founder & personal development creator.</p>
       </div>
     </a>
 
-    <a class="card" href="YOUR_LINK_2" target="_blank" rel="noopener">
-      <div class="card-thumb">
+    <a class="card" href="https://www.youtube.com/watch?v=YOUR_LINK_2" target="_blank" rel="noopener">
+      <div class="card-thumb-video">
         <span class="placeholder">▶</span>
         <div class="play-icon"><svg width="13" height="15" viewBox="0 0 13 15" fill="#0d0d0d"><polygon points="0,0 13,7.5 0,15"/></svg></div>
       </div>
       <div class="card-body">
         <p class="card-type">Video Editing</p>
-        <p class="card-title">Motion Graphic </p>
-        <p class="card-desc">3d and 2d Lyrics Animations with After Effects and Blender.</p>
+        <p class="card-title">Motion Graphic</p>
+        <p class="card-desc">3D and 2D lyrics animations with After Effects and Blender.</p>
       </div>
     </a>
 
-    <a class="card" href="#" target="_blank" rel="noopener">
-      <div class="card-thumb">
-        <img src="pedri%20croacia.jpg" alt="Spain - Croatia Euros">
-      </div>
-      <div class="card-body">
-        <p class="card-type">Graphic Design</p>
-        <p class="card-title">Spain - Croatia EUROS Matchday</p>
-        <p class="card-desc">Matchdat type design. Created from 0 & handmade, no ai.</p>
-      </div>
-    </a>
-
-    <a class="card" href="YOUR_LINK_4" target="_blank" rel="noopener">
-      <div class="card-thumb">
-        <span class="placeholder">▶</span>
-        <div class="play-icon"><svg width="13" height="15" viewBox="0 0 13 15" fill="#0d0d0d"><polygon points="0,0 13,7.5 0,15"/></svg></div>
-      </div>
-      <div class="card-body">
-        <p class="card-type">Video Editing</p>
-        <p class="card-title">Project Title 4</p>
-        <p class="card-desc">Short description — client, style, or context.</p>
-      </div>
-    </a>
-
-    <a class="card" href="YOUR_LINK_5" target="_blank" rel="noopener">
-      <div class="card-thumb">
-        <span class="placeholder">◻</span>
-      </div>
-      <div class="card-body">
-        <p class="card-type">Graphic Design</p>
-        <p class="card-title">Project Title 5</p>
-        <p class="card-desc">Short description — client, style, or context.</p>
-      </div>
-    </a>
-
-    <a class="card" href="YOUR_LINK_6" target="_blank" rel="noopener">
-      <div class="card-thumb">
-        <span class="placeholder">◻</span>
-      </div>
-      <div class="card-body">
-        <p class="card-type">3D / Blender</p>
-        <p class="card-title">Project Title 6</p>
-        <p class="card-desc">Short description — client, style, or context.</p>
-      </div>
-    </a>
+    <!-- Añade más cards de vídeo aquí copiando el bloque de arriba -->
 
   </div>
 </section>
 
+<!-- DISEÑOS (imágenes verticales con lightbox) -->
+<section id="designs">
+  <p class="section-label">Diseños</p>
+  <div class="design-grid" id="designGrid">
+
+    <!-- Card 1 — España Croacia -->
+    <div class="design-card" onclick="openLightbox(0, 'designs')">
+      <div class="design-card-thumb">
+        <img src="pedri%20croacia.jpg" alt="Spain - Croatia Euros">
+      </div>
+      <div class="design-card-label">
+        <p class="card-type">Graphic Design</p>
+        <p class="card-title">Spain — Croatia</p>
+      </div>
+      <div class="zoom-hint">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+      </div>
+    </div>
+
+    <!-- Añade el resto de diseños aquí. Cambia el índice (0,1,2...) y src de la imagen -->
+    <!-- Ejemplo de card adicional:
+    <div class="design-card" onclick="openLightbox(1, 'designs')">
+      <div class="design-card-thumb">
+        <img src="tu-imagen.jpg" alt="Descripción">
+      </div>
+      <div class="design-card-label">
+        <p class="card-type">Graphic Design</p>
+        <p class="card-title">Título del diseño</p>
+      </div>
+      <div class="zoom-hint">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+      </div>
+    </div>
+    -->
+
+  </div>
+</section>
+
+<!-- PROYECTOS PERSONALES -->
+<section id="personal">
+  <p class="section-label">Proyectos personales</p>
+  <div class="design-grid" id="personalGrid">
+
+    <!-- Mismo formato que diseños. Cambia 'designs' por 'personal' en onclick -->
+    <!-- Ejemplo:
+    <div class="design-card" onclick="openLightbox(0, 'personal')">
+      <div class="design-card-thumb">
+        <img src="palermo-bleu-1.jpg" alt="Palermo Bleu">
+      </div>
+      <div class="design-card-label">
+        <p class="card-type">Palermo Bleu</p>
+        <p class="card-title">Diseño camiseta I</p>
+      </div>
+      <div class="zoom-hint">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+      </div>
+    </div>
+    -->
+
+    <p style="color: var(--muted); font-size: 0.85rem;">— Próximamente —</p>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
 <section id="about">
   <p class="section-label">About</p>
   <div class="about-grid">
     <div class="about-text">
       <h2>Self-taught.<br>Commercially driven.</h2>
-      <p>I started editing video at 15 — first as a hobby, but then as a business. I sourced my own clients through Fiverr and social media, set my own rates, and delivered projects end-to-end.</p>
+      <p>I started editing video at 14 — not as a hobby, but as a business. I sourced my own clients through Fiverr and social media, set my own rates, and delivered projects end-to-end.</p>
       <p>Every project here was built independently. No agency, no team — just the work.</p>
     </div>
     <ul class="skills-list">
@@ -194,6 +255,7 @@
   </div>
 </section>
 
+<!-- CONTACT -->
 <section id="contact">
   <p class="section-label">Contact</p>
   <div class="contact-block">
@@ -207,6 +269,74 @@
 </section>
 
 <footer>© 2026 Lucas Custodio Masriera</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">‹</button>
+  <div class="lightbox-inner">
+    <img id="lightboxImg" src="" alt="">
+  </div>
+  <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">›</button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
+<script>
+const galleries = {
+  designs: [],
+  personal: []
+};
+
+function buildGalleries() {
+  document.querySelectorAll('#designGrid .design-card img').forEach(img => {
+    galleries.designs.push(img.src);
+  });
+  document.querySelectorAll('#personalGrid .design-card img').forEach(img => {
+    galleries.personal.push(img.src);
+  });
+}
+
+let currentGallery = 'designs';
+let currentIndex = 0;
+
+function openLightbox(index, gallery) {
+  currentGallery = gallery;
+  currentIndex = index;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxOnBg(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+function navigateLightbox(dir) {
+  const gallery = galleries[currentGallery];
+  currentIndex = (currentIndex + dir + gallery.length) % gallery.length;
+  updateLightbox();
+}
+
+function updateLightbox() {
+  const gallery = galleries[currentGallery];
+  document.getElementById('lightboxImg').src = gallery[currentIndex];
+  document.getElementById('lightboxCounter').textContent = (currentIndex + 1) + ' / ' + gallery.length;
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') navigateLightbox(1);
+  if (e.key === 'ArrowLeft') navigateLightbox(-1);
+});
+
+buildGalleries();
+</script>
 
 </body>
 </html>
