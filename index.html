@@ -40,13 +40,13 @@ section { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; border-top: 1px
 
 /* VIDEO GRID — 16/9 horizontal, 3 columns */
 .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; text-decoration: none; color: inherit; display: block; transition: border-color 0.25s, transform 0.25s; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; text-decoration: none; color: inherit; display: block; transition: border-color 0.25s, transform 0.25s; cursor: pointer; }
 .card:hover { border-color: var(--accent); transform: translateY(-3px); }
 .card-thumb-video { aspect-ratio: 16/9; background: #1a1a1a; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
 .card-thumb-video img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: opacity 0.3s; }
 .card:hover .card-thumb-video img { opacity: 1; }
 .play-icon { position: absolute; width: 42px; height: 42px; background: rgba(201,169,110,0.92); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: opacity 0.25s; }
-.card-thumb-video .play-icon { opacity: 0; }
+.card-thumb-video .play-icon { opacity: 0.7; }
 .card:hover .play-icon { opacity: 1; }
 .play-icon svg { margin-left: 3px; }
 .placeholder { color: #333; font-size: 1.6rem; }
@@ -54,6 +54,14 @@ section { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem; border-top: 1px
 .card-type { font-size: 0.63rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
 .card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.12rem; font-weight: 400; margin-bottom: 0.3rem; }
 .card-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.55; }
+
+/* VIDEO MODAL */
+.video-modal { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.93); align-items: center; justify-content: center; }
+.video-modal.active { display: flex; }
+.video-modal-inner { position: relative; width: 90vw; max-width: 960px; }
+.video-modal-inner iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
+.video-modal-close { position: absolute; top: -2.5rem; right: 0; background: none; border: none; color: var(--muted); font-size: 2rem; cursor: pointer; line-height: 1; transition: color 0.2s; }
+.video-modal-close:hover { color: var(--accent); }
 
 /* DESIGN GRID — 4/5 vertical, 4 columns */
 .design-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
@@ -134,7 +142,7 @@ footer { border-top: 1px solid var(--border); padding: 1.8rem 2rem; text-align: 
 <div class="hero">
   <p class="hero-tag">Video Editing · Motion Design · Graphic Design</p>
   <h1>Creative work<br>done <em>right.</em></h1>
-  <p>A selection of video and design projects — built independently from age 1.</p>
+  <p>A selection of video and design projects — built independently from age 14.</p>
   <div class="hero-line"></div>
 </div>
 
@@ -143,28 +151,31 @@ footer { border-top: 1px solid var(--border); padding: 1.8rem 2rem; text-align: 
   <p class="section-label">Vídeos</p>
   <div class="video-grid">
 
-    <a class="card" href="https://youtu.be/eg2DS3lCj1Q" target="_blank" rel="noopener">
-      <div class="card-thumb-video"><img src="Miguel%20ortiz%20desarrollo%20personal.jpeg" alt="Youtube Type Content"><div class="play-icon"><svg width="13" height="15" viewBox="0 0 13 15" fill="#0d0d0d"><polygon points="0,0 13,7.5 0,15"/></svg></div></div>
+    <div class="card" onclick="openVideoModal('eg2DS3lCj1Q')">
+      <div class="card-thumb-video">
+        <img src="Miguel%20ortiz%20desarrollo%20personal.jpeg" alt="Youtube Type Content">
+        <div class="play-icon"><svg width="13" height="15" viewBox="0 0 13 15" fill="#0d0d0d"><polygon points="0,0 13,7.5 0,15"/></svg></div>
+      </div>
       <div class="card-body">
         <p class="card-type">Video Editing</p>
         <p class="card-title">Youtube Type Content</p>
         <p class="card-desc">Youtube content edited for Miguel Ortiz, Symmetry founder & personal development creator.</p>
       </div>
-    </a>
+    </div>
 
-    <a class="card" href="https://www.youtube.com/watch?v=YOUR_LINK_2" target="_blank" rel="noopener">
+    <!-- Para añadir más vídeos copia este bloque y cambia el ID de YouTube:
+    <div class="card" onclick="openVideoModal('TU_ID_AQUI')">
       <div class="card-thumb-video">
-        <span class="placeholder">▶</span>
+        <img src="thumbnail.jpg" alt="Título">
         <div class="play-icon"><svg width="13" height="15" viewBox="0 0 13 15" fill="#0d0d0d"><polygon points="0,0 13,7.5 0,15"/></svg></div>
       </div>
       <div class="card-body">
         <p class="card-type">Video Editing</p>
-        <p class="card-title">Motion Graphic</p>
-        <p class="card-desc">3D and 2D lyrics animations with After Effects and Blender.</p>
+        <p class="card-title">Título</p>
+        <p class="card-desc">Descripción.</p>
       </div>
-    </a>
-
-    <!-- Añade más cards de vídeo aquí copiando el bloque de arriba -->
+    </div>
+    -->
 
   </div>
 </section>
@@ -239,7 +250,7 @@ footer { border-top: 1px solid var(--border); padding: 1.8rem 2rem; text-align: 
   <div class="about-grid">
     <div class="about-text">
       <h2>Self-taught.<br>Commercially driven.</h2>
-      <p>I started editing video at 15 — first as a hobby, but then as a business. I sourced my own clients through Fiverr and social media, set my own rates, and delivered projects end-to-end.</p>
+      <p>I started editing video at 14 — not as a hobby, but as a business. I sourced my own clients through Fiverr and social media, set my own rates, and delivered projects end-to-end.</p>
       <p>Every project here was built independently. No agency, no team — just the work.</p>
     </div>
     <ul class="skills-list">
@@ -266,6 +277,14 @@ footer { border-top: 1px solid var(--border); padding: 1.8rem 2rem; text-align: 
 
 <footer>© 2026 Lucas Custodio Masriera</footer>
 
+<!-- VIDEO MODAL -->
+<div class="video-modal" id="videoModal" onclick="closeVideoModalOnBg(event)">
+  <div class="video-modal-inner">
+    <button class="video-modal-close" onclick="closeVideoModal()">×</button>
+    <iframe id="videoIframe" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+  </div>
+</div>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
   <button class="lightbox-close" onclick="closeLightbox()">×</button>
@@ -278,7 +297,21 @@ footer { border-top: 1px solid var(--border); padding: 1.8rem 2rem; text-align: 
 </div>
 
 <script>
-const galleries = {
+function openVideoModal(youtubeId) {
+  document.getElementById('videoIframe').src = 'https://www.youtube.com/embed/' + youtubeId + '?autoplay=1';
+  document.getElementById('videoModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeVideoModal() {
+  document.getElementById('videoModal').classList.remove('active');
+  document.getElementById('videoIframe').src = '';
+  document.body.style.overflow = '';
+}
+function closeVideoModalOnBg(e) {
+  if (e.target === document.getElementById('videoModal')) closeVideoModal();
+}
+
+
   designs: [],
   personal: []
 };
@@ -325,8 +358,11 @@ function updateLightbox() {
 }
 
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeVideoModal();
+    closeLightbox();
+  }
   if (!document.getElementById('lightbox').classList.contains('active')) return;
-  if (e.key === 'Escape') closeLightbox();
   if (e.key === 'ArrowRight') navigateLightbox(1);
   if (e.key === 'ArrowLeft') navigateLightbox(-1);
 });
